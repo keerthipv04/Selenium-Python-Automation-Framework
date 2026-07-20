@@ -11,7 +11,7 @@ def test_login(setup):
     driver = setup
 
     # Open the CSV file
-    file = open(r"C:\Users\HP\OneDrive\Desktop\projects\DemoQA_framework\test_data\demoqa_file - Sheet1.csv","r")
+    file = open("test_data/demoqa_file - Sheet1.csv","r")
 
     reader = csv.reader(file)
 
