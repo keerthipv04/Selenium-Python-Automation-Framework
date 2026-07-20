@@ -37,6 +37,8 @@ class LoginPage:
         return error.text
 
     def logout_btn(self):
-        WebDriverWait(self.driver, 5).until(
-            EC.element_to_be_clickable(self.logout_locator)
-        ).click()
+    button = WebDriverWait(self.driver, 10).until(
+        EC.element_to_be_clickable(self.logout_locator)
+    )
+    self.driver.execute_script("arguments[0].scrollIntoView(true);", button)
+    self.driver.execute_script("arguments[0].click();", button)
