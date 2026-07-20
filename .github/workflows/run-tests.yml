@@ -24,4 +24,4 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Run tests
-        run: pytest tests/test_login.py
+        run: pytest tests/
