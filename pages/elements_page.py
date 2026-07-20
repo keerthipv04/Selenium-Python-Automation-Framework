@@ -1,7 +1,7 @@
-
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
-
 
 
 class ElementPage():
@@ -27,39 +27,46 @@ class ElementPage():
         self.submit_button= (By.ID,"submit")
 
 
+    #new reusable helper
+    def safe_click(self, locator):
+        element = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(locator)
+        )
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        self.driver.execute_script("arguments[0].click();", element)
+
+
 #methods
 
     def click_element_section(self):
-        self.driver.find_element(*self.element_section).click()
-        
+        self.safe_click(self.element_section)
 
     def click_text_box(self):
-        self.driver.find_element(*self.text_box).click()  
+        self.safe_click(self.text_box)
 
     def click_check_box(self):
-        self.driver.find_element(*self.check_box).click()
+        self.safe_click(self.check_box)
 
     def click_radio_button(self):
-        self.driver.find_element(*self.radio_button).click()
+        self.safe_click(self.radio_button)
 
     def click_web_tables(self):
-        self.driver.find_element(*self.web_tables).click()    
+        self.safe_click(self.web_tables)
 
     def click_buttons_section(self):
-        self.driver.find_element(*self.buttons).click()   
+        self.safe_click(self.buttons)
 
     def click_links(self):
-        self.driver.find_element(*self.links).click()
+        self.safe_click(self.links)
 
     def click_broken_links(self):
-        self.driver.find_element(*self.broken_links).click()    
+        self.safe_click(self.broken_links)
 
     def click_upload_and_download(self):
-        self.driver.find_element(*self.upload_download).click() 
+        self.safe_click(self.upload_download)
 
     def click_dynamic_properties(self):
-        self.driver.find_element(*self.dynamic_properties).click()  
-
+        self.safe_click(self.dynamic_properties)
 
 
     def fill_text_box(self, name, email, address, p_address):
@@ -71,6 +78,3 @@ class ElementPage():
         self.driver.execute_script("arguments[0].scrollIntoView(true);", submit)
         time.sleep(1)
         self.driver.execute_script("arguments[0].click();", submit)
-
-
-    
