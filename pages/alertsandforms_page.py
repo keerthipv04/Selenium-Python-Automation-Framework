@@ -16,17 +16,22 @@ class AlertsFrame:
         # Alert
         self.simple_alert = (By.ID, "alertButton")
 
+    def safe_click(self, locator):
+        element = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(locator)
+        )
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        self.driver.execute_script("arguments[0].click();", element)
+
     def open_alert_section(self):
-        WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.click_alert_section)).click()
+        self.safe_click(self.click_alert_section)
 
     def open_alerts(self):
-        WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.click_alerts)).click()
+        self.safe_click(self.click_alerts)
 
     def simple_alert_popup(self):
-        WebDriverWait(self.driver,10).until(EC.element_to_be_clickable(self.simple_alert)).click()
-
+        self.safe_click(self.simple_alert)
         WebDriverWait(self.driver,10).until(EC.alert_is_present())
-
         self.driver.switch_to.alert.accept()
 
     def perform_alerts_frame_flow(self):
